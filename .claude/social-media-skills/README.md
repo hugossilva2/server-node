@@ -52,6 +52,9 @@ ou explicitamente pelo nome: `/post-writer-sms`.
 Fluxo recomendado: `social-media-context-sms` → `content-strategy-sms` →
 `content-calendar-sms` → skills de criação → skills de análise.
 
+**Passo a passo completo em [`GUIA-DE-USO.md`](GUIA-DE-USO.md)** — o que cada
+skill pede de entrada, o que entrega, e o ciclo mensal de análise.
+
 ## Integração com MCP (opcional)
 
 As skills de análise e publicação usam o MCP do **BlackTwist**
