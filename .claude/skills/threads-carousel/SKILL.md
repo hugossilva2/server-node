@@ -318,6 +318,9 @@ node "$SKILL_DIR/scripts/shot.mjs" ./out 1080 1350
 # 3. optional: all slides into a single PDF
 node "$SKILL_DIR/scripts/pdf.mjs" ./out ./carrossel.pdf
 
+# 4. optional: one editable SVG per slide, for Illustrator / Figma
+node "$SKILL_DIR/scripts/svg.mjs" ./svg 1080 1350
+
 # optional: strip leftover white background from a cut-out photo and trim it
 #   args: <src> <out> <threshold, default 232 — lower strips more>
 # Only safe when the subject wears nothing near-white; pass 999 to trim only.
@@ -326,9 +329,24 @@ node "$SKILL_DIR/scripts/clean.mjs" foto.png public/images/foto.png 232
 
 `shot.mjs` finds the offscreen full-size export nodes the app already renders,
 un-hides them one at a time and screenshots each — so the PNGs are identical to
-what the toolbar's "Export All" produces. Always open the rendered PNGs and check
-them: adaptive sizing is calibrated for Latin text and long words can still
-overflow.
+what the toolbar's "Export All" produces. All three scripts hide the Next.js dev
+indicator first; without that, its badge is burned into the bottom-left corner of
+every export. Always open the rendered PNGs and check them: adaptive sizing is
+calibrated for Latin text and long words can still overflow.
+
+`svg.mjs` walks the same rendered DOM and rebuilds each slide as SVG: live
+`<text>` (one element per visual line, split by measuring each character's own
+rect so words never break mid-word), `<rect>` for panels and boxes, and embedded
+rasters resampled to 2x their displayed size. Colour emoji is baked to a bitmap —
+Illustrator cannot render it as a glyph. **Editing the text needs Unbounded and
+Space Grotesk installed locally** (both free on Google Fonts); otherwise the app
+substitutes and the metrics shift.
+
+`verify.mjs` rasterises the exported SVGs back to PNG inside the app's own
+document, so the check reflects the SVG rather than a font fallback. Expect a few
+percent of pixels to differ from the PNG export — SVG and DOM text rasterise
+differently at glyph edges. A larger difference, or ghosted/doubled glyphs in a
+diff, means a real positional bug.
 
 #### Parallel carousels
 

@@ -13,6 +13,8 @@ const page = await browser.newPage({
 });
 await page.goto('http://localhost:3333', { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
+await page.addStyleTag({ content: 'nextjs-portal, [data-nextjs-toast], #__next-build-watcher { display: none !important; }' });
+
 await page.waitForTimeout(1500);
 
 // The export slides are the offscreen fixed-position divs rendered at full canvas size.
