@@ -47,8 +47,47 @@ Converts a text post into a set of visual carousel slides for Threads, Instagram
 | `image` | Title + screenshot/photo + optional caption | `imageSrc`, optional `title`, `imageCaption` |
 | `emoji` | Giant emoji illustration + title + text | `emoji`, optional `title`, `text` |
 | `number` | Huge hero number/string + title + text | `bigNumber`, optional `title`, `text` |
+| `photo` | Cut-out portrait bleeding off the bottom, copy in the free corner | `photoSrc`, `text`, optional `kicker`, `title`, `footnote` |
+| `proposta` | Pillar slide: icon, name, subtitle, problem, commitment box | `title`, `subtitle`, `problem`, `commitment`, optional `icon`, `boldTerms` |
 
 `points` shape: `Array<{ type: "plus" | "minus"; text: string }>` — green ✓ for plus, muted ✗ for minus. Adaptive sizing (44–62px) based on item count and longest line.
+
+### Per-slide colour (added for multi-pillar decks)
+
+`DEFAULT_SURFACE` sets the deck-wide look, but any slide can override it so one
+deck alternates pages:
+
+- `surface` / `accent` — pick another id from the palettes below.
+- `bgColor` / `fgColor` — raw hex, for brand colours outside the palette
+  (`bgColor: "#1A7AB5", fgColor: "#FFFFFF"`). `fgColor` drives text, dividers
+  and highlights at once, so a pillar slide only needs those two fields.
+
+### `photo` slides
+
+`photoSrc` expects a **transparent-background cut-out** under `/public/`; a photo
+with its background still attached renders as a pasted rectangle. `photoAlign`
+(`"left"` / `"right"`) and `photoHeight` (fraction of canvas height, default 0.6)
+place it. Copy fields are `kicker` (small caps line), `text` (the headline, sized
+automatically to the longest line), `title` (supporting line) and `footnote`.
+
+Use `scripts/clean.mjs` when a cut-out still has white fringes or leftover
+background boxes — see **Headless export** below.
+
+### `proposta` slides
+
+For decks where each slide is one policy pillar. `title` is the pillar name,
+`subtitle` the one-line promise, `problem` the running text, and `commitment`
+goes into a tinted box at the bottom of every slide, giving the deck a constant
+anchor. `boldTerms` lists the exact substrings of `commitment` to set heavy —
+use it for the numbers, which is the whole point of a commitment slide:
+
+```ts
+commitment: "projeto de lei protocolado em até 90 dias de mandato...",
+boldTerms: ["90 dias", "30 dias"],
+```
+
+Type sizes step down automatically as the copy gets longer, so pillars of
+different lengths still fill the same canvas.
 
 All types also support optional:
 - `badge` — small outlined tag above title (e.g. `"01"`, `"TIP"`)
@@ -256,6 +295,34 @@ Tell the user to open `http://localhost:3333`. They can:
 - Click an individual slide thumbnail to export just that one as PNG
 
 After export, stop the dev server.
+
+#### Headless export (no browser needed)
+
+The toolbar export needs a human at `localhost:3333`. When there is no reachable
+browser — a remote/cloud session, or a batch run — render straight from the DOM
+with Playwright instead. `scripts/` holds three helpers:
+
+```bash
+# 1. dev server up
+cd "$WORK_DIR" && bun dev --port 3333 &
+
+# 2. one PNG per slide, at exact canvas size
+node "$SKILL_DIR/scripts/shot.mjs" ./out 1080 1350
+
+# 3. optional: all slides into a single PDF
+node "$SKILL_DIR/scripts/pdf.mjs" ./out ./carrossel.pdf
+
+# optional: strip leftover white background from a cut-out photo and trim it
+#   args: <src> <out> <threshold, default 232 — lower strips more>
+# Only safe when the subject wears nothing near-white; pass 999 to trim only.
+node "$SKILL_DIR/scripts/clean.mjs" foto.png public/images/foto.png 232
+```
+
+`shot.mjs` finds the offscreen full-size export nodes the app already renders,
+un-hides them one at a time and screenshots each — so the PNGs are identical to
+what the toolbar's "Export All" produces. Always open the rendered PNGs and check
+them: adaptive sizing is calibrated for Latin text and long words can still
+overflow.
 
 #### Parallel carousels
 

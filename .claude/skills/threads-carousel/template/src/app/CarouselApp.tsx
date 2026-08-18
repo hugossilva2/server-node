@@ -1234,6 +1234,293 @@ function SlideComparison({
   );
 }
 
+/**
+ * Cut-out portrait composed against the surface: the photo bleeds off the
+ * bottom edge and the copy sits in the free top corner. Built for transparent
+ * PNG cut-outs — a photo with a background will look like a pasted rectangle.
+ */
+/** Splits text so the given substrings can be rendered in a heavier weight. */
+function withBoldTerms(text: string, terms?: string[]): ReactNode[] {
+  if (!terms || terms.length === 0) return [text];
+  const escaped = terms
+    .slice()
+    .sort((a, b) => b.length - a.length)
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const parts = text.split(new RegExp(`(${escaped.join("|")})`, "g"));
+  return parts.map((part, i) =>
+    terms.includes(part) ? (
+      <strong key={i} style={{ fontWeight: 900 }}>
+        {part}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
+
+/** Returns true when the foreground colour is light, i.e. the surface is dark. */
+function isLightOn(color: string): boolean {
+  const hex = color.replace("#", "");
+  if (hex.length < 6) return true;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  return (r * 299 + g * 587 + b * 114) / 1000 > 140;
+}
+
+/**
+ * Pillar slide: icon, name, subtitle, the problem in running text, and the
+ * commitment in a tinted box with its numbers set heavy. Type sizes step down
+ * as the copy gets longer so every pillar fits the same canvas.
+ */
+function SlideProposta({
+  data,
+  preset,
+  index,
+  total,
+  bgType,
+}: {
+  data: SlideData;
+  preset: StylePreset;
+  index: number;
+  total: number;
+  bgType: BgType;
+}) {
+  const fg = preset.textColor;
+  const onDark = isLightOn(fg);
+  const boxBg = onDark ? "rgba(0,0,0,0.26)" : "rgba(0,0,0,0.09)";
+  const boxBorder = onDark ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.16)";
+
+  const title = data.title ?? "";
+  const nameSize = title.length > 22 ? 58 : title.length > 15 ? 66 : 76;
+  const problem = data.problem ?? "";
+  const problemSize = problem.length > 175 ? 35 : problem.length > 140 ? 38 : 41;
+  const commitment = data.commitment ?? "";
+  const commitSize = commitment.length > 130 ? 31 : 33;
+
+  return (
+    <div
+      style={{
+        width: 1080,
+        height: 1350,
+        background: preset.bg,
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        padding: 80,
+        fontFamily: preset.fontFamily,
+        boxSizing: "border-box",
+      }}
+    >
+      <SlideBackground bgType={bgType} slideIndex={index} preset={preset} />
+
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 0 }}>
+        {data.icon && <div style={{ fontSize: 76, lineHeight: 1, marginBottom: 20 }}>{data.icon}</div>}
+
+        <div
+          style={{
+            fontFamily: preset.hookFontFamily ?? preset.fontFamily,
+            fontSize: nameSize,
+            fontWeight: 800,
+            lineHeight: 1.04,
+            letterSpacing: "-0.02em",
+            textTransform: "uppercase",
+            color: fg,
+            textWrap: "balance",
+          }}
+        >
+          {title}
+        </div>
+
+        {data.subtitle && (
+          <div
+            style={{
+              fontSize: 42,
+              fontWeight: 700,
+              lineHeight: 1.24,
+              marginTop: 18,
+              color: fg,
+              opacity: 0.95,
+            }}
+          >
+            {data.subtitle}
+          </div>
+        )}
+
+        {problem && (
+          <div
+            style={{
+              fontSize: problemSize,
+              fontWeight: 500,
+              lineHeight: 1.5,
+              marginTop: 30,
+              color: fg,
+              opacity: 0.86,
+            }}
+          >
+            {problem}
+          </div>
+        )}
+      </div>
+
+      {commitment && (
+        <div
+          style={{
+            background: boxBg,
+            border: `2px solid ${boxBorder}`,
+            borderRadius: 22,
+            padding: "30px 32px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 23,
+              fontWeight: 800,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: fg,
+              opacity: 0.75,
+              marginBottom: 12,
+            }}
+          >
+            O compromisso
+          </div>
+          <div style={{ fontSize: commitSize, fontWeight: 600, lineHeight: 1.42, color: fg }}>
+            {withBoldTerms(commitment, data.boldTerms)}
+          </div>
+        </div>
+      )}
+
+      <SlideCounter current={index} total={total} color={fg} />
+    </div>
+  );
+}
+
+function SlidePhoto({
+  data,
+  preset,
+  index,
+  total,
+  bgType,
+}: {
+  data: SlideData;
+  preset: StylePreset;
+  index: number;
+  total: number;
+  bgType: BgType;
+}) {
+  const { w: CANVAS_W, h: CANVAS_H } = useCanvasSize();
+  const alignRight = data.photoAlign !== "left";
+  const photoH = Math.round(CANVAS_H * (data.photoHeight ?? 0.6));
+  const hookFont = preset.hookFontFamily ?? preset.fontFamily;
+  const lines = (data.text ?? "").split("\n");
+  // Unbounded 800 runs ~0.78em per character; size to the longest line so the
+  // headline never bleeds past the canvas edge.
+  const longest = lines.reduce((n, l) => Math.max(n, l.length), 0);
+  const usableW = CANVAS_W - 160;
+  const headSize = Math.max(40, Math.min(108, Math.floor(usableW / (longest * 0.78))));
+
+  return (
+    <div
+      style={{
+        width: CANVAS_W,
+        height: CANVAS_H,
+        background: preset.bgGradient || preset.bg,
+        position: "relative",
+        overflow: "hidden",
+        fontFamily: preset.fontFamily,
+        boxSizing: "border-box",
+      }}
+    >
+      <SlideBackground bgType={bgType} slideIndex={index} preset={preset} />
+
+      {data.photoSrc && (
+        <img
+          src={data.photoSrc}
+          alt={data.title || "retrato"}
+          crossOrigin="anonymous"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            [alignRight ? "right" : "left"]: -40,
+            height: photoH,
+            width: "auto",
+            objectFit: "contain",
+            objectPosition: "bottom",
+          }}
+        />
+      )}
+
+      <div
+        style={{
+          position: "absolute",
+          top: 80,
+          left: 80,
+          right: 80,
+          display: "flex",
+          flexDirection: "column",
+          gap: 28,
+        }}
+      >
+        {data.kicker && (
+          <div
+            style={{
+              fontSize: 30,
+              fontWeight: 800,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: preset.highlightColor,
+            }}
+          >
+            {data.kicker}
+          </div>
+        )}
+        <div
+          style={{
+            fontFamily: hookFont,
+            fontSize: headSize,
+            fontWeight: 800,
+            lineHeight: 1.02,
+            letterSpacing: "-0.02em",
+            color: preset.highlightColor,
+            textWrap: "balance",
+          }}
+        >
+          {lines.map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
+        </div>
+        {data.title && (
+          <div
+            style={{
+              fontSize: 42,
+              fontWeight: 600,
+              lineHeight: 1.25,
+              color: preset.textColor,
+              maxWidth: "78%",
+            }}
+          >
+            {data.title}
+          </div>
+        )}
+        {data.footnote && (
+          <div
+            style={{
+              fontSize: 40,
+              fontWeight: 700,
+              color: preset.highlightColor,
+              marginTop: 8,
+            }}
+          >
+            {data.footnote}
+          </div>
+        )}
+      </div>
+
+      <SlideCounter current={index} total={total} color={preset.accentColor} />
+    </div>
+  );
+}
+
 function SlideImage({
   data,
   preset,
@@ -1457,9 +1744,44 @@ function SlideNumber({
   );
 }
 
+/**
+ * Applies a slide's own surface / accent on top of the deck-wide preset, so a
+ * single deck can alternate pages (e.g. black cover, yellow proposal pages).
+ * Typography overrides from the purpose axis are preserved.
+ */
+function applySlideOverrides(data: SlideData, preset: StylePreset): StylePreset {
+  if (!data.surface && !data.accent && !data.bgColor && !data.fgColor) return preset;
+  const next = { ...preset };
+  if (data.surface) {
+    const s = SURFACES[data.surface];
+    next.bg = s.bg;
+    next.bgGradient = s.bgGradient;
+    next.textColor = s.textColor;
+    next.textSecondary = s.textSecondary;
+    next.accentColor = s.accentColor;
+    // Purpose presets pin body/title colors to the deck surface — re-point them.
+    if (next.bodyColor) next.bodyColor = s.textSecondary;
+    if (next.titleColor) next.titleColor = s.accentColor;
+  }
+  if (data.accent) next.highlightColor = ACCENTS[data.accent].color;
+  if (data.bgColor) {
+    next.bg = data.bgColor;
+    next.bgGradient = undefined;
+  }
+  if (data.fgColor) {
+    next.textColor = data.fgColor;
+    next.textSecondary = data.fgColor;
+    next.accentColor = data.fgColor;
+    next.titleColor = data.fgColor;
+    next.bodyColor = data.fgColor;
+    next.highlightColor = data.fgColor;
+  }
+  return next;
+}
+
 function Slide({
   data,
-  preset,
+  preset: deckPreset,
   index,
   total,
   bgType,
@@ -1470,6 +1792,7 @@ function Slide({
   total: number;
   bgType: BgType;
 }) {
+  const preset = applySlideOverrides(data, deckPreset);
   switch (data.type) {
     case "hook":
       return <SlideHook data={data} preset={preset} index={index} total={total} bgType={bgType} />;
@@ -1487,6 +1810,10 @@ function Slide({
       return <SlideComparison data={data} preset={preset} index={index} total={total} bgType={bgType} />;
     case "image":
       return <SlideImage data={data} preset={preset} index={index} total={total} bgType={bgType} />;
+    case "photo":
+      return <SlidePhoto data={data} preset={preset} index={index} total={total} bgType={bgType} />;
+    case "proposta":
+      return <SlideProposta data={data} preset={preset} index={index} total={total} bgType={bgType} />;
     case "emoji":
       return <SlideEmoji data={data} preset={preset} index={index} total={total} bgType={bgType} />;
     case "number":

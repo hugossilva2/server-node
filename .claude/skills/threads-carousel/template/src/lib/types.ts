@@ -16,7 +16,9 @@ export type SlideType =
   | "comparison"
   | "image"
   | "emoji"
-  | "number";
+  | "number"
+  | "photo"
+  | "proposta";
 
 export type BgType =
   | "none"
@@ -98,6 +100,29 @@ export interface Accent {
 
 export interface SlideData {
   type: SlideType;
+  /** Per-slide surface override — lets one deck alternate black / yellow pages. */
+  surface?: SurfaceId;
+  /** Per-slide accent override. */
+  accent?: AccentId;
+  /** Raw per-slide colors, for brand hexes outside the surface palette. */
+  bgColor?: string;
+  fgColor?: string;
+  // proposta slide
+  icon?: string;
+  subtitle?: string;
+  problem?: string;
+  commitment?: string;
+  /** Substrings of `commitment` rendered in heavy weight — the numbers. */
+  boldTerms?: string[];
+  /** Cut-out portrait (transparent PNG) composed against the surface. */
+  photoSrc?: string;
+  photoAlign?: "left" | "right";
+  /** Photo height as a fraction of canvas height. Default 0.6. */
+  photoHeight?: number;
+  /** Small line above the headline on photo slides. */
+  kicker?: string;
+  /** Closing line under the headline on photo slides. */
+  footnote?: string;
   text?: string;
   title?: string;
   badge?: string;
