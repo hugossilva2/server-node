@@ -8,7 +8,8 @@ const threshold = Number(thrRaw ?? 232);
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
-const dataUrl = `data:image/png;base64,${readFileSync(src).toString('base64')}`;
+const mime = /\.jpe?g$/i.test(src) ? 'image/jpeg' : /\.webp$/i.test(src) ? 'image/webp' : 'image/png';
+const dataUrl = `data:${mime};base64,${readFileSync(src).toString('base64')}`;
 
 const result = await page.evaluate(async ({ dataUrl, threshold }) => {
   const img = new Image();

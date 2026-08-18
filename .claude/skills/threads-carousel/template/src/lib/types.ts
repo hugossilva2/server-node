@@ -121,6 +121,12 @@ export interface SlideData {
   photoHeight?: number;
   /** Small line above the headline on photo slides. */
   kicker?: string;
+  /** Campaign logo, anchored in the corner opposite the photo. */
+  logoSrc?: string;
+  /** Logo width in px. Default 340. */
+  logoWidth?: number;
+  /** Sets the logo on a light plate — needed when logo and surface share a hue. */
+  logoPlate?: boolean;
   /** Closing line under the headline on photo slides. */
   footnote?: string;
   text?: string;

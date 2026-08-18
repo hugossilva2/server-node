@@ -17,6 +17,8 @@ export const SLIDES: SlideData[] = [
     photoSrc: "/images/wellington-bracos-cruzados.png",
     photoAlign: "right",
     photoHeight: 0.62,
+    logoSrc: "/images/logo-wellington.png",
+    logoWidth: 330,
   },
   {
     type: "proposta",
@@ -87,13 +89,16 @@ export const SLIDES: SlideData[] = [
     type: "photo",
     bgColor: "#FACC15",
     fgColor: "#0A0A0A",
-    kicker: "Wellington Oliveira · PSB Bahia",
+    kicker: "PSB Bahia",
     text: "Compromisso com prazo\npode ser cobrado.",
     title: "Promessa sem data é só propaganda.",
     footnote: "Vote em Wellington para Deputado Estadual",
     photoSrc: "/images/wellington-maos.png",
     photoAlign: "right",
     photoHeight: 0.68,
+    logoSrc: "/images/logo-wellington.png",
+    logoWidth: 300,
+    logoPlate: true,
   },
 ];
 

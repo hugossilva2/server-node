@@ -1516,6 +1516,32 @@ function SlidePhoto({
         )}
       </div>
 
+      {data.logoSrc && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: 120,
+            [alignRight ? "left" : "right"]: 80,
+            ...(data.logoPlate
+              ? {
+                  background: "#FFFFFF",
+                  borderRadius: 24,
+                  padding: "26px 30px",
+                  boxShadow: "0 12px 40px rgba(0,0,0,0.16)",
+                }
+              : {}),
+            display: "flex",
+          }}
+        >
+          <img
+            src={data.logoSrc}
+            alt="Wellington Oliveira 40.888"
+            crossOrigin="anonymous"
+            style={{ width: data.logoWidth ?? 340, height: "auto", display: "block" }}
+          />
+        </div>
+      )}
+
       <SlideCounter current={index} total={total} color={preset.accentColor} />
     </div>
   );

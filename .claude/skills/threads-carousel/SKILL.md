@@ -70,8 +70,14 @@ with its background still attached renders as a pasted rectangle. `photoAlign`
 place it. Copy fields are `kicker` (small caps line), `text` (the headline, sized
 automatically to the longest line), `title` (supporting line) and `footnote`.
 
+`logoSrc` drops a campaign logo in the corner opposite the photo, sized by
+`logoWidth` (default 340). Set `logoPlate: true` to seat it on a white plate —
+needed whenever logo and background share a hue (a yellow-and-red logo vanishes
+on a yellow slide).
+
 Use `scripts/clean.mjs` when a cut-out still has white fringes or leftover
-background boxes — see **Headless export** below.
+background boxes, or to knock the background out of a logo delivered as JPEG —
+see **Headless export** below.
 
 ### `proposta` slides
 
