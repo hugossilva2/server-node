@@ -1,0 +1,11 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1080, "h": 1080, "title": "Feed 1080x1080" },
+    { "file": "SeloClaro.dc.html", "x": 1200, "y": 0, "w": 1080, "h": 1080, "title": "Alternativa clara" },
+    { "file": "Story.dc.html", "x": 2400, "y": 0, "w": 1080, "h": 1920, "title": "Story 1080x1920" }
+  ],
+  "annotations": [
+    { "id": "nota-logo", "x": 0, "y": -170, "w": 700, "text": "Os retângulos tracejados são o espaço reservado para o logo do candidato — me mande o arquivo (PNG com fundo transparente) que eu encaixo no lugar.\n\nO card do feed é o principal; a versão clara ao lado é uma alternativa sem foto." }
+  ],
+  "launch": { "view": "canvas" }
+}

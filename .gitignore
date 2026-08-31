@@ -1,3 +1,7 @@
 node_modules
 # Keep environment variables out of version control
 .env
+
+# Canvas de design publicado (2,7 MB, regenerável a partir dos .dc.html)
+.design/**/*.html
+!.design/**/*.dc.html
