@@ -14,39 +14,46 @@
 </helmet>
 <div style="width: 1080px; height: 1080px; display: flex; flex-direction: column; overflow: hidden; background: {{bg}}; font-family: 'Helvetica Neue', Helvetica, system-ui, sans-serif;">
 
-  <div style="flex-grow: 1; display: flex; align-items: stretch;">
-
-    <div style="width: 452px; background-image: url(./santuario.jpg); background-size: cover; background-position: 52% 30%;"></div>
-
-    <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 66px 54px 58px 50px;">
-
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="width: 44px; height: 2px; background: {{accent}};"></div>
-          <div style="font-size: 19px; letter-spacing: 5px; font-weight: 600; color: {{accent}};">31 DE AGOSTO</div>
-        </div>
-        <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 68px; font-weight: 700; line-height: 1.02; letter-spacing: -0.5px; color: #f4efe4;">BOM JESUS<br>DA LAPA</div>
-        <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 27px; color: {{accent}};">Capital Baiana da Fé</div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 205px; font-weight: 700; line-height: 0.84; letter-spacing: -6px; color: {{accent}};">103</div>
-        <div style="font-size: 17px; letter-spacing: 3.5px; font-weight: 600; color: rgba(244, 239, 228, 0.7);">ANOS DE EMANCIPAÇÃO</div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 26px;">
-        <div style="font-size: 21px; line-height: 1.5; color: rgba(244, 239, 228, 0.74); text-wrap: pretty;">Parabéns à terra que acolhe o Brasil inteiro em romaria e ensina, todo dia, a força da fé e do trabalho.</div>
-        <div style="height: 1px; background: rgba(216, 165, 68, 0.28);"></div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
-          <div style="width: 252px; height: 78px; border: 2px dashed rgba(216, 165, 68, 0.55); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 3px; font-weight: 600; color: rgba(216, 165, 68, 0.85); text-align: center;">LOGO DO CANDIDATO</div>
-          <div style="font-size: 19px; letter-spacing: 2px; color: rgba(244, 239, 228, 0.5);">1923 · 2026</div>
-        </div>
-      </div>
-
+  <div style="height: 520px; display: grid; grid-template-columns: 640px 434px; grid-template-rows: 257px 257px; gap: 6px;">
+    <div style="grid-row: span 2; background-image: url(./gruta.jpg); background-size: cover; background-position: center 30%;"></div>
+    <div style="background: #102c42; border: 2px dashed rgba(216, 165, 68, 0.5); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <div style="font-size: 13px; letter-spacing: 3px; font-weight: 600; color: rgba(216, 165, 68, 0.9);">FOTO DA CIDADE</div>
+      <div style="font-size: 12px; color: rgba(244, 239, 228, 0.45);">rio São Francisco / orla</div>
+    </div>
+    <div style="background: #102c42; border: 2px dashed rgba(216, 165, 68, 0.5); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <div style="font-size: 13px; letter-spacing: 3px; font-weight: 600; color: rgba(216, 165, 68, 0.9);">FOTO DA CIDADE</div>
+      <div style="font-size: 12px; color: rgba(244, 239, 228, 0.45);">morro da Lapa / vista aérea</div>
     </div>
   </div>
 
-  <div style="height: 18px; background-image: url(./fitas.jpg); background-size: cover; background-position: center;"></div>
+  <div style="flex-grow: 1; display: flex; align-items: center; justify-content: space-between; gap: 34px; padding: 44px 56px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 42px; height: 2px; background: {{accent}};"></div>
+        <div style="font-size: 18px; letter-spacing: 5px; font-weight: 600; color: {{accent}};">31 DE AGOSTO</div>
+      </div>
+      <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 54px; font-weight: 700; line-height: 1.05; letter-spacing: -0.5px; color: #f4efe4;">BOM JESUS DA LAPA</div>
+      <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 25px; color: {{accent}};">Capital Baiana da Fé</div>
+      <div style="font-size: 19px; line-height: 1.5; max-width: 470px; color: rgba(244, 239, 228, 0.7); text-wrap: pretty;">Parabéns à terra que acolhe o Brasil inteiro em romaria e ensina, todo dia, a força da fé e do trabalho.</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+      <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 164px; font-weight: 700; line-height: 0.84; letter-spacing: -6px; color: {{accent}};">103</div>
+      <div style="font-size: 14px; letter-spacing: 3px; font-weight: 600; color: rgba(244, 239, 228, 0.65);">ANOS DE EMANCIPAÇÃO</div>
+    </div>
+  </div>
+
+  <div style="height: 140px; background: rgba(0, 0, 0, 0.26); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 56px;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <div style="width: 96px; height: 96px; border-radius: 50%; border: 2px solid {{accent}}; background-image: url(./candidato.jpg); background-size: cover; background-position: 50% 38%;"></div>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 27px; font-weight: 700; color: #f4efe4;">Wellington Oliveira</div>
+        <div style="font-size: 14px; letter-spacing: 2px; font-weight: 600; color: {{accent}};">CANDIDATO A DEPUTADO ESTADUAL</div>
+      </div>
+    </div>
+    <div style="width: 196px; height: 66px; border: 2px dashed rgba(216, 165, 68, 0.55); display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 3px; font-weight: 600; color: rgba(216, 165, 68, 0.85); text-align: center;">LOGO</div>
+  </div>
+
+  <div style="height: 14px; background-image: url(./fitas.jpg); background-size: cover; background-position: center;"></div>
 </div>
 </x-dc>
 <script data-dc-script data-props='{"accent":{"editor":"color","default":"#d8a544","options":["#d8a544","#c8622e","#2f7d6b","#b8352f"]},"bg":{"editor":"color","default":"#0d2436","options":["#0d2436","#12301c","#2a1120","#1c1c1c"]},"$preview":{"width":1080,"height":1080}}'>

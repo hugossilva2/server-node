@@ -9,43 +9,57 @@
 <helmet>
   <style>
     body { margin: 0; }
-    a { color: #0d2436; } a:hover { color: #d8a544; }
+    a { color: #0d2436; } a:hover { color: #b8862b; }
   </style>
 </helmet>
-<div style="width: 1080px; height: 1080px; overflow: hidden; background: #f2ece0; padding: 44px; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, system-ui, sans-serif;">
-  <div style="height: 100%; box-sizing: border-box; border: 1px solid rgba(13, 36, 54, 0.22); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding: 56px 72px 0;">
+<div style="width: 1080px; height: 1080px; display: flex; flex-direction: column; overflow: hidden; background: #f2ece0; font-family: 'Helvetica Neue', Helvetica, system-ui, sans-serif;">
 
-    <div style="font-size: 16px; letter-spacing: 7px; font-weight: 600; color: rgba(13, 36, 54, 0.55);">BAHIA · BRASIL</div>
-
-    <div style="width: 64px; height: 2px; background: {{accent}};"></div>
-
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 14px;">
-      <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 232px; font-weight: 700; line-height: 0.82; letter-spacing: -8px; color: #0d2436;">103</div>
-      <div style="font-size: 17px; letter-spacing: 5px; font-weight: 600; color: {{accent}};">ANOS DE EMANCIPAÇÃO</div>
+  <div style="height: 420px; display: flex; align-items: center; justify-content: space-between; gap: 34px; padding: 0 56px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 42px; height: 2px; background: {{accent}};"></div>
+        <div style="font-size: 18px; letter-spacing: 5px; font-weight: 600; color: {{accent}};">31 DE AGOSTO</div>
+      </div>
+      <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 54px; font-weight: 700; line-height: 1.05; letter-spacing: -0.5px; color: #0d2436;">BOM JESUS DA LAPA</div>
+      <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 25px; color: rgba(13, 36, 54, 0.6);">Capital Baiana da Fé</div>
+      <div style="font-size: 19px; line-height: 1.5; max-width: 450px; color: rgba(13, 36, 54, 0.68); text-wrap: pretty;">Parabéns à terra que acolhe o Brasil inteiro em romaria e ensina, todo dia, a força da fé e do trabalho.</div>
     </div>
-
-    <div style="width: 100%; height: 1px; background: rgba(13, 36, 54, 0.18);"></div>
-
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-      <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 62px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.05; color: #0d2436; text-align: center;">BOM JESUS DA LAPA</div>
-      <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 28px; color: rgba(13, 36, 54, 0.62);">Capital Baiana da Fé</div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+      <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 164px; font-weight: 700; line-height: 0.84; letter-spacing: -6px; color: #0d2436;">103</div>
+      <div style="font-size: 14px; letter-spacing: 3px; font-weight: 600; color: {{accent}};">ANOS DE EMANCIPAÇÃO</div>
     </div>
-
-    <div style="font-size: 19px; letter-spacing: 3px; color: rgba(13, 36, 54, 0.5);">31 DE AGOSTO · 1923 — 2026</div>
-
-    <div style="flex-grow: 1;"></div>
-
-    <div style="width: 252px; height: 78px; border: 2px dashed rgba(13, 36, 54, 0.35); display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 3px; font-weight: 600; color: rgba(13, 36, 54, 0.6); text-align: center;">LOGO DO CANDIDATO</div>
-
-    <div style="width: 100%; height: 16px; background-image: url(./fitas.jpg); background-size: cover; background-position: center;"></div>
-
   </div>
+
+  <div style="height: 466px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px;">
+    <div style="background-image: url(./gruta.jpg); background-size: cover; background-position: center 25%;"></div>
+    <div style="background: #e6dece; border: 2px dashed rgba(13, 36, 54, 0.3); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <div style="font-size: 13px; letter-spacing: 3px; font-weight: 600; color: rgba(13, 36, 54, 0.6);">FOTO DA CIDADE</div>
+      <div style="font-size: 12px; color: rgba(13, 36, 54, 0.42);">rio São Francisco</div>
+    </div>
+    <div style="background: #e6dece; border: 2px dashed rgba(13, 36, 54, 0.3); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <div style="font-size: 13px; letter-spacing: 3px; font-weight: 600; color: rgba(13, 36, 54, 0.6);">FOTO DA CIDADE</div>
+      <div style="font-size: 12px; color: rgba(13, 36, 54, 0.42);">morro da Lapa</div>
+    </div>
+  </div>
+
+  <div style="height: 180px; background: #0d2436; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 56px;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <div style="width: 104px; height: 104px; border-radius: 50%; border: 2px solid {{accent}}; background-image: url(./candidato.jpg); background-size: cover; background-position: 50% 38%;"></div>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 29px; font-weight: 700; color: #f4efe4;">Wellington Oliveira</div>
+        <div style="font-size: 14px; letter-spacing: 2px; font-weight: 600; color: {{accent}};">CANDIDATO A DEPUTADO ESTADUAL</div>
+      </div>
+    </div>
+    <div style="width: 196px; height: 66px; border: 2px dashed rgba(216, 165, 68, 0.55); display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 3px; font-weight: 600; color: rgba(216, 165, 68, 0.85); text-align: center;">LOGO</div>
+  </div>
+
+  <div style="height: 14px; background-image: url(./fitas.jpg); background-size: cover; background-position: center;"></div>
 </div>
 </x-dc>
-<script data-dc-script data-props='{"accent":{"editor":"color","default":"#c8912f","options":["#c8912f","#c8622e","#2f7d6b","#b8352f"]},"$preview":{"width":1080,"height":1080}}'>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#b8862b","options":["#b8862b","#c8622e","#2f7d6b","#b8352f"]},"$preview":{"width":1080,"height":1080}}'>
 class Component extends DCLogic {
   renderVals() {
-    return { accent: this.props.accent ?? '#c8912f' };
+    return { accent: this.props.accent ?? '#b8862b' };
   }
 }
 </script>

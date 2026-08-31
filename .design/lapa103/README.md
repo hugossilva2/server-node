@@ -13,8 +13,8 @@ Publicado em: https://claude.ai/code/artifact/03fec196-b9cb-4834-a67c-e4c438ee6e
 | `SeloClaro.dc.html` | Alternativa clara, 1080×1080, sem foto |
 | `Story.dc.html` | Story, 1080×1920 |
 | `canvas.json` | Posição das pranchetas no canvas |
-| `santuario.jpg` | Foto do Santuário, recorte vertical (coluna do feed) |
-| `santuario-story.jpg` | Foto do Santuário, recorte do story |
+| `gruta.jpg` | Crucifixo do Santuário, recorte sem pessoas |
+| `candidato.jpg` | Retrato do candidato, recorte quadrado |
 | `fitas.jpg` | Faixa das fitas do Santuário, usada como borda |
 
 O `.html` publicado não é versionado — ele é gerado a partir dos arquivos
@@ -22,7 +22,11 @@ acima e pesa 2,7 MB.
 
 ## Pendências
 
-- **Logo do candidato.** Os retângulos tracejados são o espaço reservado.
+- **Fotos da cidade.** Os dois quadros tracejados do mosaico aguardam
+  imagens próprias de Bom Jesus da Lapa (rio São Francisco, orla, morro
+  da Lapa, vista aérea). Não foram buscadas fotos de terceiros na web
+  por causa de direito de uso numa peça de campanha.
+- **Logo do candidato.** Retângulo tracejado na barra de assinatura.
   Substituir por um PNG com fundo transparente.
 - Confirmar com o jurídico da campanha se a peça precisa levar número e
   partido.
@@ -38,7 +42,7 @@ node "<base da skill design>/seed-canvas.mjs" \
   --out bom-jesus-da-lapa-103-anos.html \
   --title "Bom Jesus da Lapa 103 Anos" \
   --artboard Main.dc.html --artboard SeloClaro.dc.html --artboard Story.dc.html \
-  --image santuario.jpg --image santuario-story.jpg --image fitas.jpg \
+  --image gruta.jpg --image candidato.jpg --image fitas.jpg \
   --canvas canvas.json
 ```
 

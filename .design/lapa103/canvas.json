@@ -5,7 +5,7 @@
     { "file": "Story.dc.html", "x": 2400, "y": 0, "w": 1080, "h": 1920, "title": "Story 1080x1920" }
   ],
   "annotations": [
-    { "id": "nota-logo", "x": 0, "y": -170, "w": 700, "text": "Os retângulos tracejados são o espaço reservado para o logo do candidato — me mande o arquivo (PNG com fundo transparente) que eu encaixo no lugar.\n\nO card do feed é o principal; a versão clara ao lado é uma alternativa sem foto." }
+    { "id": "nota-fotos", "x": 0, "y": -190, "w": 760, "text": "Faltam dois arquivos para o card ficar pronto:\n\n1) FOTOS DA CIDADE — os quadros tracejados esperam imagens suas de Bom Jesus da Lapa (rio São Francisco, orla, morro da Lapa, vista aérea). Me mande que eu encaixo.\n\n2) LOGO — o retângulo tracejado na barra de baixo. PNG com fundo transparente.\n\nA foto do Santuário e o retrato do candidato saíram da imagem que você enviou." }
   ],
   "launch": { "view": "canvas" }
 }
